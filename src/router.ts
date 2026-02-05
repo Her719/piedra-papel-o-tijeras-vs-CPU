@@ -3,6 +3,9 @@ import { initInstrucciones } from "../src/pages/intrucciones";
 import { initJuego } from "../src/pages/juego";
 import { initResultado } from "../src/pages/resultado";
 
+// 🔹 Cambiá esto solo si cambia el nombre del repo
+const BASE_PATH = "/piedra-papel-o-tijeras-vs-CPU";
+
 const routes = [
   {
     path: /\/welcome/,
@@ -26,17 +29,34 @@ const routes = [
   },
 ];
 
+// 🔹 Limpia el pathname tanto en local como en producción
+function getCleanPathFromURL() {
+  const fullPath = window.location.pathname;
+
+  // Producción (gh-pages)
+  if (fullPath.startsWith(BASE_PATH)) {
+    const cleanPath = fullPath.replace(BASE_PATH, "");
+    return cleanPath === "" ? "/" : cleanPath;
+  }
+
+  // Localhost
+  return fullPath;
+}
+
 export function initRouter(container: Element) {
   function goTo(path: string) {
-    history.pushState({}, "", path);
+    const cleanPath = path === "/" ? BASE_PATH + "/" : BASE_PATH + path;
+
+    history.pushState({}, "", cleanPath);
     handleRoute(path);
   }
+
   function handleRoute(route: string) {
-    console.log("El handleRoute recibio una nueva ruta", route);
+    console.log("El handleRoute recibió una nueva ruta", route);
 
     for (const r of routes) {
       if (r.path.test(route)) {
-        // fondo ON / OFF
+        // Fondo ON / OFF
         if (r.background) {
           container.classList.add("with-background");
         } else {
@@ -48,17 +68,21 @@ export function initRouter(container: Element) {
         if (container.firstChild) {
           container.firstChild.remove();
         }
+
         container.appendChild(el);
       }
     }
   }
 
-  if (location.pathname == "/") {
+  const currentPath = getCleanPathFromURL();
+
+  if (currentPath === "/") {
     goTo("/welcome");
   } else {
-    handleRoute(location.pathname);
+    handleRoute(currentPath);
   }
+
   window.onpopstate = function () {
-    handleRoute(location.pathname);
+    handleRoute(getCleanPathFromURL());
   };
 }

@@ -1,15 +1,13 @@
 {
-  "name": "4-todolist",
+  "name": "12-desafio-piedra-papel-tijeras",
   "version": "1.0.0",
-  "description": "",
   "license": "ISC",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "parcel src/index.html",
-    "build": "parcel build src/index.html",
-    "deploy": "gh-pages -d ./dist",
+    "build": "parcel build src/index.html --dist-dir build --public-url /piedra-papel-o-tijeras-vs-CPU",
+    "deploy": "gh-pages -d build -b gh-pages",
     "build-and-deploy": "pnpm build && pnpm deploy",
-    "clean-build": "rm -rf dist .parcel-cache node_modules/.cache && parcel build index.html"
+    "clean-build": "rm -rf build .parcel-cache node_modules/.cache && parcel build src/index.html --dist-dir build --public-url /piedra-papel-o-tijeras-vs-CPU"
   },
   "dependencies": {
     "parcel": "^2.16.3",
