@@ -10,7 +10,8 @@
     "clean-build": "rm -rf build .parcel-cache node_modules/.cache && parcel build src/index.html --dist-dir build --public-url /piedra-papel-o-tijeras-vs-CPU"
   },
   "dependencies": {
-    "parcel": "^2.16.3",
-    "gh-pages": "^6.3.0"
+    "12-desafio-piedra-papel-tijeras": "link:",
+    "gh-pages": "^6.3.0",
+    "parcel": "^2.16.3"
   }
 }
