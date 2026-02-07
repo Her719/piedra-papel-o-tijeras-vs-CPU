@@ -42,7 +42,7 @@ export function initTextGame() {
         text-align: center;
         font-family: Permanent Marker;
         max-width: 308px;
-        height: 219px;
+        min-height: 219px;
         }
         
 
@@ -56,7 +56,7 @@ export function initTextGame() {
         font-family: Permanent Marker;
         max-width: 317px;
         min-width: 300px;
-        height: 240px;
+        min-height: 240px;
       }
       
       .intro{
